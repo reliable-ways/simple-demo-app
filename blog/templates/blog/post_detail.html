@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ post.title }}</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/styles.css' %}">
+</head>
+<body>
+    <h1>{{ post.title }}</h1>
+    <p>By {{ post.author }} | Published on {{ post.published_at|date:"F d, Y" }}</p>
+    <hr>
+    <p>{{ post.content }}</p>
+    <a href="/">Back to Homepage</a>
+</body>
+</html>
