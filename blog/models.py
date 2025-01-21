@@ -16,6 +16,7 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True) # Automatically records when the post was created.
     published_at = models.DateTimeField(blank=True, null=True) # Records when the post was published (optional).
     tags = TaggableManager()  # Add the tagging functionality
+    thumbnail = models.ImageField(upload_to='thumbnails/', blank=True, null=True) # Add thumbnail
 
     class Meta:
         # attribute ensures that posts are sorted by publication date in descending order (most recent first).

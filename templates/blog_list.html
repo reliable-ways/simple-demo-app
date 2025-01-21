@@ -1,9 +1,126 @@
-{% for post in posts %}
-<h2>{{ post.title }}</h2>
-<p>{{ post.content }}</p>
-<p>Tags:
-  {% for tag in post.tags.all %}
-  <a href="?tag={{ tag }}">{{ tag }}</a>
-  {% endfor %}
-</p>
-{% endfor %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Posts</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 20px auto;
+    }
+
+    .post-card {
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+      overflow: hidden;
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .thumbnail {
+      flex: 1 1 250px;
+      max-width: 250px;
+      overflow: hidden;
+    }
+
+    .thumbnail img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .content {
+      flex: 2 1 400px;
+      padding: 20px;
+    }
+
+    .content h2 {
+      font-size: 1.5rem;
+      margin: 0 0 10px;
+      color: #333;
+    }
+
+    .content p {
+      margin: 0 0 15px;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .tags {
+      margin-top: 10px;
+    }
+
+    .tags a {
+      display: inline-block;
+      padding: 5px 10px;
+      margin: 5px 5px 0 0;
+      font-size: 0.875rem;
+      text-decoration: none;
+      color: #fff;
+      background-color: #007bff;
+      border-radius: 20px;
+      transition: background-color 0.3s;
+    }
+
+    .tags a:hover {
+      background-color: #0056b3;
+    }
+
+    @media (max-width: 768px) {
+      .post-card {
+        flex-direction: column;
+      }
+
+      .thumbnail {
+        max-width: 100%;
+      }
+
+      .content {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    {% for post in posts %}
+    <div class="post-card">
+      
+      <!-- Thumbnail -->
+      <div class="thumbnail">
+        {% if post.thumbnail %}
+        <img src="{{ post.thumbnail.url }}" alt="{{ post.title }}">
+        {% else %}
+        <img src="https://via.placeholder.com/250?text=No+Image" alt="No thumbnail">
+        {% endif %}
+      </div>
+      
+      <!-- Content -->
+      <div class="content">
+        <h2>{{ post.title }}</h2>
+        <p>{{ post.content|truncatechars:200 }}</p>
+        
+        <!-- Tags -->
+        <div class="tags">
+          {% for tag in post.tags.all %}
+          <a href="?tag={{ tag }}">{{ tag }}</a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</body>
+</html>
