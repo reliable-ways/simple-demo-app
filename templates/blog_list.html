@@ -107,10 +107,10 @@
         {% endif %}
       </div>
       
-      <!-- Content -->
       <div class="content">
         <h2>{{ post.title }}</h2>
         <p>{{ post.content|truncatechars:200 }}</p>
+        <p><strong>Views:</strong> {{ post.views }}</p>
         
         <!-- Tags -->
         <div class="tags">
