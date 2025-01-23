@@ -11,5 +11,27 @@
     <hr>
     <p>{{ post.content }}</p>
     <a href="/">Back to Homepage</a>
+
+    <h2>Comments</h2>
+    {% for comment in comments %}
+        <div>
+            <p><strong>{{ comment.name }}</strong> ({{ comment.created_at|date:"F d, Y" }})</p>
+            <p>{{ comment.body }}</p>
+        </div>
+    {% empty %}
+        <p>No comments yet. Be the first to comment!</p>
+    {% endfor %}
+    
+    <hr>
+    <h2>Leave a Comment</h2>
+    {% if new_comment %}
+        <p>Your comment has been added successfully!</p>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        {{ comment_form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
 </body>
 </html>
+
