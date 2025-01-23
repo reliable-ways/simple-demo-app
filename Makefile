@@ -11,3 +11,6 @@ migrations:
 
 run:
 	@python manage.py runserver
+
+user: 
+	@python manage.py createsuperuser
