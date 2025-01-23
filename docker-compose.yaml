@@ -1,0 +1,18 @@
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_DB: local
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+    ports:
+      - "5432:5432"
+  web:
+    build: .
+    env_file: .env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+

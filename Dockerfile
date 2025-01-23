@@ -18,7 +18,6 @@ RUN pip install --no-cache-dir --upgrade pip \
   && pip install --no-cache-dir -r requirements.txt
 
 COPY . .
-COPY .env.example .env
 
 RUN python manage.py collectstatic --noinput \
   && python manage.py makemigrations \
