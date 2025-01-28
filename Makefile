@@ -16,7 +16,7 @@ user:
 	@python manage.py createsuperuser
 
 build:
-	@docker-compose build
+	@docker-compose build -d
 
 run-docker:
-	@docker-compose up
+	@docker-compose up -d

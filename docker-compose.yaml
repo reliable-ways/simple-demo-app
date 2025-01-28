@@ -7,12 +7,32 @@ services:
       POSTGRES_PASSWORD: root
     ports:
       - "5432:5432"
+    networks:
+      - bridge-network
+
   web:
     build: .
-    env_file: .env
+    env_file:
+      - .env
+    environment:
+      SECRET_KEY: ${SECRET_KEY}
+      DEBUG: ${DEBUG}
+      ALLOWED_HOSTS: ${ALLOWED_HOSTS}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_HOST: ${DB_HOST}
+      DB_PORT: 5432
+      DJANGO_SUPERUSER_PASSWORD: "root"
     ports:
       - "8000:8000"
+    restart:
+      on-failure
     depends_on:
       - db
+    networks:
+      - bridge-network
 
-
+networks:
+  bridge-network:
+    driver: bridge
