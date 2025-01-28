@@ -64,7 +64,7 @@ To run the tests:
 docker compose exec web python manage.py test
 ```
 
-## Deployment
+## Development
 
 ### Building Docker Images
 
